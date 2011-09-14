@@ -1,0 +1,35 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.68.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 67b6202bc92b8673ec791a569e6f825688a52dab Build.PL
+SHA1 fc875eaf783bbbb1f0986b3105456d819cae5979 CHANGES
+SHA1 6e0ef6fd898cfeca712579753b0a69161dbabde9 LICENSE
+SHA1 5f898e5a5086677b4fa475e2d0b29cb6633ae182 MANIFEST
+SHA1 4f8c24b077708c9920a6a1386f48d59aa3cfbead META.json
+SHA1 590b50362fb51c74e2d27ac845088f7b1de5034c META.yml
+SHA1 15ff62717963c3f5842489ba89a3a5bbf518d33e README
+SHA1 a58f7838e455755a495939ac2c72adcaa496cc4b bin/twimap
+SHA1 4c52cf466a0b35257f8b914a2876891d927df3c2 lib/App/Twimap.pm
+SHA1 b8719dd3df6d4cdbb2289be86b3a5b63db4e73d3 lib/App/Twimap/Tweet.pm
+SHA1 0333537debf44ae57b3315a69d1fde7dfe0d4598 t/email.t
+SHA1 4a453e35bdac09fb3c212067c402955465758a36 twimap.conf
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iEYEARECAAYFAk5wgEoACgkQnvdMljFk9hWKawCg3IAdUUngGvRdWp1rqwT+YNdx
+AcMAn3r9kMdBuCJ6OV0tQs9+sVSd0Aiy
+=dmLu
+-----END PGP SIGNATURE-----
