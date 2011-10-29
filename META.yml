@@ -6,7 +6,7 @@ build_requires: {}
 configure_requires:
   Module::Build: 0.38
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110930'
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112150'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,7 +15,7 @@ name: App-Twimap
 provides:
   App::Twimap:
     file: lib/App/Twimap.pm
-    version: 0.01
+    version: 0.02
   App::Twimap::Tweet:
     file: lib/App/Twimap/Tweet.pm
     version: 0
@@ -33,9 +33,12 @@ requires:
   Mail::IMAPClient: 0
   Moose: 0
   Net::Twitter: 0
+  Test::Differences::Color: 0
+  Text::Wrap: 0
+  TryCatch: 0
   URI::WithBase: 0
   Web::oEmbed::Common: 0
 resources:
   homepage: http://search.cpan.org/dist/App-Twimap/
   license: http://dev.perl.org/licenses/
-version: 0.01
+version: 0.02

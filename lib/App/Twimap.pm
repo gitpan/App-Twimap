@@ -7,12 +7,13 @@ use Encode;
 use List::Util qw(max);
 use LWP::UserAgent;
 use Web::oEmbed::Common;
+use TryCatch;
 use URI::WithBase;
 has 'mail_imapclient' =>
     ( is => 'ro', isa => 'Mail::IMAPClient', required => 1 );
 has 'net_twitter' => ( is => 'ro', isa => 'Net::Twitter', required => 1 );
 has 'mailbox'     => ( is => 'ro', isa => 'Str',          required => 1 );
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub imap_tids {
     my $self    = shift;
@@ -49,23 +50,14 @@ sub sync_home_timeline {
     while (1) {
         warn
             "Fetching home timeline since id $since_id and max_id $max_id...";
-        my $tweets;
         my $new_tweets = 0;
-        while (1) {
-            my $conf = {
-                count            => 100,
-                include_entities => 1
-            };
-            $conf->{since_id} = $since_id if $since_id;
-            $conf->{max_id}   = $max_id   if $max_id;
-            eval {
-                $tweets = $twitter->home_timeline($conf);
-                warn Dumper( $twitter->get_error ) unless $tweets;
-            };
-            last unless $@;
-            warn $@;
-            sleep 10;
-        }
+        my $conf       = {
+            count            => 100,
+            include_entities => 1,
+        };
+        $conf->{since_id} = $since_id if $since_id;
+        $conf->{max_id}   = $max_id   if $max_id;
+        my $tweets = $twitter->home_timeline($conf);
 
         foreach my $data (@$tweets) {
             my $tweet = App::Twimap::Tweet->new( data => $data );
@@ -83,7 +75,7 @@ sub sync_home_timeline {
         }
         last unless $new_tweets;
         warn "sleeping...";
-        sleep 30;
+        sleep $twitter->until_rate(0.2) || 1;
     }
 }
 
@@ -111,7 +103,14 @@ sub sync_replies {
     foreach my $tid (@todo) {
         next if $tids->{$tid};
         warn "fetching $tid...";
-        my $data = $twitter->show_status( $tid, { include_entities => 1 } );
+        my $data;
+        try {
+            $data = $twitter->show_status( $tid, { include_entities => 1 } );
+        }
+        catch($err) {
+            warn $err;
+            next;
+        };
         my $tweet = App::Twimap::Tweet->new( data => $data );
         push @todo, $tweet->in_reply_to_status_id
             if $tweet->in_reply_to_status_id;
@@ -119,7 +118,7 @@ sub sync_replies {
         $self->append_email($email);
         $tids->{$tid} = 1;
         warn "sleeping...";
-        sleep 30;
+        sleep $twitter->until_rate(0.2) || 1;
     }
 }
 
