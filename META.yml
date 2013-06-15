@@ -4,9 +4,9 @@ author:
   - 'Leon Brocard <acme@astray.com>'
 build_requires: {}
 configure_requires:
-  Module::Build: 0.38
+  Module::Build: 0.40
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.112150'
+generated_by: 'Module::Build version 0.4005, CPAN::Meta::Converter version 2.131560'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -15,11 +15,11 @@ name: App-Twimap
 provides:
   App::Twimap:
     file: lib/App/Twimap.pm
-    version: 0.02
+    version: 0.03
   App::Twimap::Tweet:
     file: lib/App/Twimap/Tweet.pm
-    version: 0
 requires:
+  Algorithm::TokenBucket: 0
   Config::Tiny: 0
   DateTime: 0
   DateTime::Format::Strptime: 0
@@ -32,7 +32,7 @@ requires:
   List::Util: 0
   Mail::IMAPClient: 0
   Moose: 0
-  Net::Twitter: 0
+  Net::Twitter: 4.00006
   Test::Differences::Color: 0
   Text::Wrap: 0
   TryCatch: 0
@@ -41,4 +41,4 @@ requires:
 resources:
   homepage: http://search.cpan.org/dist/App-Twimap/
   license: http://dev.perl.org/licenses/
-version: 0.02
+version: 0.03
